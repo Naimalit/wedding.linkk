@@ -17,12 +17,14 @@
 }
 
 .vv-inv__content {
+  display: none;
   opacity: 0;
   pointer-events: none;
   transition: opacity 1.1s ease 0.4s;
 }
 
 .vv-inv__content--visible {
+  display: block;
   opacity: 1;
   pointer-events: auto;
 }

@@ -28,10 +28,82 @@
   }
 }
 
-/* True mobile devices — edge-to-edge, no frame */
+/* ─── Mobile: lock viewport so envelope gate is visible immediately ─── */
 @media (max-width: 767px) {
+  html:has(.demo-shell),
+  body:has(.demo-shell) {
+    overflow: hidden;
+    height: 100svh;
+    width: 100%;
+    position: fixed;
+    overscroll-behavior: none;
+  }
+
   .demo-shell {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100svh;
+    max-height: 100svh;
     padding: 0;
-    background: #fffdfb;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* Gates — use small viewport height (Safari URL bar safe) */
+  .cel-gate,
+  .sg-gate,
+  .ldr-gate,
+  .vv-gate,
+  .inv-luxe-gate {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+    overflow: hidden !important;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+
+  /* Invitation roots fill one screen while gate is open */
+  .cel-inv,
+  .sg-inv,
+  .ldr-inv,
+  .vv-inv,
+  .invitation-demo {
+    height: 100svh;
+    max-height: 100svh;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  /* Hidden content must not push page height before gate opens */
+  .cel-inv__content:not(.cel-inv__content--visible),
+  .sg-inv__content:not(.sg-inv__content--visible),
+  .ldr-inv__content:not(.ldr-inv__content--visible),
+  .vv-inv__content:not(.vv-inv__content--visible),
+  .inv-main:not(.is-visible) {
+    display: none !important;
+  }
+
+  /* After gate opens — scroll inside invitation only */
+  .cel-inv__content--visible,
+  .sg-inv__content--visible,
+  .ldr-inv__content--visible,
+  .vv-inv__content--visible,
+  .inv-main.is-visible {
+    display: block;
+    height: 100svh;
+    max-height: 100svh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 }

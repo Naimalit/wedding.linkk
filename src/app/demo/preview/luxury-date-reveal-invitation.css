@@ -15,12 +15,14 @@
 }
 
 .ldr-inv__content {
+  display: none;
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease 0.2s;
 }
 
 .ldr-inv__content--visible {
+  display: block;
   opacity: 1;
   pointer-events: auto;
 }
