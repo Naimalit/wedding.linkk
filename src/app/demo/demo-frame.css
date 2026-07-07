@@ -1,0 +1,37 @@
+/* ─── Demo shell — full screen on mobile, iPhone 17 preview on desktop ─── */
+
+.demo-shell {
+  min-height: 100dvh;
+  background: #fafaf8;
+}
+
+.demo-phone-device {
+  width: 100%;
+}
+
+/* Desktop / laptop: centered iPhone 17 preview */
+@media (min-width: 768px) {
+  .demo-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: 28px 20px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(183, 110, 121, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(199, 107, 152, 0.06) 0%, transparent 70%),
+      #ebe8e4;
+  }
+
+  .demo-phone-device {
+    width: auto;
+  }
+}
+
+/* True mobile devices — edge-to-edge, no frame */
+@media (max-width: 767px) {
+  .demo-shell {
+    padding: 0;
+    background: #fffdfb;
+  }
+}

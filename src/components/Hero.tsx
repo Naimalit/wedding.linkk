@@ -5,6 +5,8 @@ import { Button } from "./ui/Button";
 import { WhatsAppButton } from "./ui/WhatsAppButton";
 import { orderMessage } from "@/lib/whatsapp";
 import { PRICING } from "@/lib/constants";
+import { PREMIUM_DEMOS } from "@/data/premium-demos";
+import { PhoneMockup } from "./ui/PhoneMockup";
 
 export function Hero() {
   const { t, locale } = useI18n();
@@ -15,6 +17,9 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-1/4 h-96 w-96 rounded-full bg-[#b76e79]/10 blur-3xl" />
         <div className="absolute bottom-20 right-1/4 h-80 w-80 rounded-full bg-[#f4e4e4] blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#64a0bd]/8 blur-3xl" />
+        <div className="absolute top-1/3 right-1/3 h-64 w-64 rounded-full bg-[#e8c872]/10 blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/3 h-56 w-56 rounded-full bg-[#c76b98]/10 blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -42,7 +47,7 @@ export function Hero() {
               size="lg"
               variant="primary"
             />
-            <Button href="/demo/preview" variant="outline" size="lg">
+            <Button href="#themes" variant="outline" size="lg">
               {t.hero.ctaSecondary}
             </Button>
           </div>
@@ -55,39 +60,57 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="relative z-10 mx-auto mt-20 max-w-sm">
-          <a href="/demo/preview" className="group block">
-            <div className="relative mx-auto h-[500px] w-[255px] overflow-hidden rounded-[2.75rem] border-[6px] border-[#e8ddd8] bg-[#fafaf8] shadow-2xl shadow-[#b76e79]/15 transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[#b76e79]/30">
-              <div className="absolute inset-0 bg-gradient-to-b from-[#f4e4e4] via-[#fafaf8] to-[#f4e4e4]/90" />
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-35 transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: "url('/demo/hero.jpg')" }}
-              />
-              <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-                <p className="mb-4 text-[9px] uppercase tracking-[0.35em] text-[#b76e79]/70">
-                  {t.hero.ctaSecondary}
-                </p>
+        <div className="relative z-10 mx-auto mt-20 flex max-w-6xl flex-col items-center justify-center gap-10 sm:flex-row sm:flex-wrap sm:items-end sm:justify-center sm:gap-5 lg:gap-6">
+          {PREMIUM_DEMOS.map((demo) => {
+            const label = t.themes.items[demo.themeId] ?? demo.themeId;
+            return (
+              <a key={demo.slug} href={demo.href} className="group block no-underline">
                 <p
-                  className="font-serif text-[2.4rem] leading-none text-[#b76e79]"
-                  style={{ fontFamily: "var(--font-serif)" }}
+                  className="mb-3 text-center text-[10px] font-medium uppercase tracking-[0.25em]"
+                  style={{ color: demo.accent }}
                 >
-                  Erion
+                  {label}
                 </p>
-                <p className="font-serif text-lg text-[#2c2c2c]/25">&amp;</p>
-                <p
-                  className="font-serif text-[2.4rem] leading-none text-[#b76e79]"
-                  style={{ fontFamily: "var(--font-serif)" }}
-                >
-                  Sara
-                </p>
-                <div className="my-5 h-px w-10 bg-[#b76e79]/30" />
-                <p className="text-xs tracking-[0.25em] text-[#2c2c2c]/55">22 · 08 · 2026</p>
-                <span className="mt-8 inline-flex items-center gap-1 rounded-full bg-[#b76e79] px-5 py-2.5 text-[10px] font-medium uppercase tracking-widest text-white shadow-md shadow-[#b76e79]/20 transition-colors group-hover:bg-[#9a5a64]">
-                  Hap ftesën →
-                </span>
-              </div>
-            </div>
-          </a>
+                <PhoneMockup size="md" hover className={`mx-auto ${demo.glow}`}>
+                  <div className="relative h-full w-full overflow-hidden bg-[#fafaf8]">
+                    <div className={`absolute inset-0 bg-gradient-to-b ${demo.bg}`} />
+                    <div
+                      className="absolute inset-0 bg-cover bg-center opacity-35 transition-transform duration-700 group-hover:scale-105"
+                      style={{ backgroundImage: `url('${demo.image}')` }}
+                    />
+                    <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 pt-8 text-center">
+                      <p
+                        className="mb-3 text-[8px] uppercase tracking-[0.35em] opacity-70"
+                        style={{ color: demo.accent }}
+                      >
+                        {t.hero.ctaSecondary}
+                      </p>
+                      <p
+                        className="font-serif text-[2rem] leading-none sm:text-[1.85rem]"
+                        style={{ fontFamily: "var(--font-serif)", color: demo.accent }}
+                      >
+                        {demo.names[0]}
+                      </p>
+                      <p className="font-serif text-base text-[#2c2c2c]/25">&amp;</p>
+                      <p
+                        className="font-serif text-[2rem] leading-none sm:text-[1.85rem]"
+                        style={{ fontFamily: "var(--font-serif)", color: demo.accent }}
+                      >
+                        {demo.names[1]}
+                      </p>
+                      <div className="my-4 h-px w-10 opacity-30" style={{ backgroundColor: demo.accent }} />
+                      <p className="text-[10px] tracking-[0.25em] text-[#2c2c2c]/55">{demo.date}</p>
+                      <span
+                        className={`mt-6 inline-flex items-center rounded-full px-4 py-2 text-[8px] font-medium uppercase tracking-widest text-white shadow-md transition-colors ${demo.btn}`}
+                      >
+                        {t.hero.openInvite}
+                      </span>
+                    </div>
+                  </div>
+                </PhoneMockup>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

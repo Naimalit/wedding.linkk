@@ -1,0 +1,556 @@
+/* ─── Vibrant Vows gate — wax-sealed letter unfold ─── */
+
+.vv-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 90% 70% at 50% 35%, #2a1028 0%, #180818 55%, #0e040e 100%);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  overflow: hidden;
+  transition: opacity 1.1s ease 0.5s, transform 1.1s ease 0.5s;
+}
+
+.vv-gate--opening {
+  cursor: default;
+}
+
+.vv-gate--out {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.06);
+}
+
+.vv-gate__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(199, 107, 152, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 35% at 80% 20%, rgba(240, 168, 200, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.vv-gate__warmth {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse 40% 35% at 50% 52%, rgba(255, 160, 100, 0.25) 0%, transparent 70%);
+  transition: opacity 0.8s ease;
+}
+
+.vv-gate__warmth--on {
+  opacity: 1;
+  animation: vv-warmth-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes vv-warmth-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ─── Floating petals ─── */
+.vv-gate__petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.vv-gate__petal {
+  position: absolute;
+  top: -20px;
+  border-radius: 50% 0 50% 0;
+  background: linear-gradient(135deg, rgba(240, 168, 200, 0.7), rgba(199, 107, 152, 0.45));
+  opacity: 0.55;
+  animation: vv-petal-fall linear infinite;
+}
+
+@keyframes vv-petal-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.55; }
+  90% { opacity: 0.35; }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ─── Folded letter ─── */
+.vv-letter {
+  position: relative;
+  z-index: 4;
+  width: min(300px, 78vw);
+  height: min(420px, 95vw);
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  animation: vv-letter-float 4.5s ease-in-out infinite;
+}
+
+.vv-gate--opening .vv-letter {
+  animation: none;
+}
+
+.vv-letter--bloom,
+.vv-letter--done {
+  animation: vv-letter-bloom 1.1s ease forwards;
+}
+
+@keyframes vv-letter-float {
+  0%, 100% { transform: translateY(0) rotateX(4deg); }
+  50% { transform: translateY(-12px) rotateX(-2deg); }
+}
+
+@keyframes vv-letter-bloom {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-30px) scale(1.35); opacity: 0; }
+}
+
+.vv-letter__shadow {
+  position: absolute;
+  bottom: -18px;
+  left: 8%;
+  right: 8%;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 70%);
+  filter: blur(8px);
+  transition: opacity 0.6s ease;
+}
+
+.vv-letter--bloom .vv-letter__shadow,
+.vv-letter--done .vv-letter__shadow {
+  opacity: 0;
+}
+
+/* Base sheet */
+.vv-letter__base {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #fff8fc 0%, #fde8f4 40%, #f8d4e8 100%);
+  border-radius: 3px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.8) inset,
+    0 24px 60px rgba(24, 8, 24, 0.45),
+    0 4px 12px rgba(199, 107, 152, 0.15);
+  overflow: hidden;
+}
+
+.vv-letter__base::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.vv-letter__border {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(199, 107, 152, 0.25);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.vv-letter__border::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(199, 107, 152, 0.12);
+}
+
+.vv-letter__lines {
+  position: absolute;
+  inset: 55% 24px 24px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 22px,
+    rgba(199, 107, 152, 0.08) 22px,
+    rgba(199, 107, 152, 0.08) 23px
+  );
+  pointer-events: none;
+}
+
+.vv-letter__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+}
+
+.vv-letter--unfold .vv-letter__inner,
+.vv-letter--bloom .vv-letter__inner,
+.vv-letter--done .vv-letter__inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vv-letter__eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(199, 107, 152, 0.65);
+}
+
+.vv-letter__names {
+  margin: 0;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(2.2rem, 9vw, 2.8rem);
+  color: #c76b98;
+  line-height: 1.1;
+}
+
+.vv-letter__date {
+  margin: 0.75rem 0 1.25rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: rgba(42, 20, 40, 0.55);
+}
+
+.vv-letter__quote {
+  margin: 0;
+  max-width: 220px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: rgba(42, 20, 40, 0.45);
+}
+
+/* Top folded flap */
+.vv-letter__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  z-index: 3;
+  transition: transform 1.2s cubic-bezier(0.35, 0, 0.15, 1);
+}
+
+.vv-letter--unfold .vv-letter__flap,
+.vv-letter--bloom .vv-letter__flap,
+.vv-letter--done .vv-letter__flap {
+  transform: rotateX(-168deg);
+  transition-delay: 0.1s;
+}
+
+.vv-letter__flap-face,
+.vv-letter__flap-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 3px 3px 0 0;
+}
+
+.vv-letter__flap-face {
+  background:
+    linear-gradient(175deg, #fff5fa 0%, #f8d8ec 55%, #f0c0dc 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 8px 20px rgba(199, 107, 152, 0.12);
+}
+
+.vv-letter__flap-face::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(199, 107, 152, 0.3), transparent);
+}
+
+.vv-letter__flap-back {
+  transform: rotateX(180deg);
+  background: linear-gradient(0deg, #fde8f4 0%, #fff8fc 100%);
+}
+
+/* ─── Wax seal ─── */
+.vv-letter__wax {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 5;
+  width: 92px;
+  height: 92px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.vv-letter__wax-pool {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
+  background: radial-gradient(ellipse at 40% 35%, #c87898 0%, #9e4068 45%, #702848 100%);
+  box-shadow:
+    inset 0 -4px 8px rgba(0, 0, 0, 0.25),
+    inset 0 3px 6px rgba(255, 200, 220, 0.35),
+    0 6px 16px rgba(80, 20, 50, 0.4);
+}
+
+.vv-letter__wax-body {
+  position: relative;
+  z-index: 1;
+  width: 72px;
+  height: 72px;
+  border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(ellipse at 35% 30%, #e090b0 0%, #b05078 50%, #802848 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 220, 235, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.vv-letter--warm .vv-letter__wax-body {
+  filter: brightness(1.15) saturate(1.2);
+  animation: vv-wax-heat 0.7s ease forwards;
+}
+
+@keyframes vv-wax-heat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1.02); }
+}
+
+.vv-letter__wax-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 240, 248, 0.92);
+  text-shadow: 0 1px 2px rgba(60, 10, 35, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.vv-letter__wax--break .vv-letter__wax-body {
+  animation: vv-wax-crack 0.5s ease forwards;
+}
+
+@keyframes vv-wax-crack {
+  0% { transform: scale(1.02); opacity: 1; }
+  40% { transform: scale(1.08); opacity: 0.9; }
+  100% { transform: scale(0.3); opacity: 0; }
+}
+
+.vv-letter__wax--break {
+  pointer-events: none;
+}
+
+/* Wax drips */
+.vv-letter__drip {
+  position: absolute;
+  width: 8px;
+  border-radius: 0 0 50% 50%;
+  background: linear-gradient(180deg, #b05078, #802848);
+  opacity: 0;
+  z-index: 0;
+}
+
+.vv-letter__wax--break .vv-letter__drip {
+  animation: vv-drip 0.9s ease forwards;
+}
+
+.vv-letter__drip--1 {
+  top: 72%;
+  left: 38%;
+  height: 0;
+}
+
+.vv-letter__drip--2 {
+  top: 70%;
+  left: 58%;
+  height: 0;
+  animation-delay: 0.1s !important;
+}
+
+.vv-letter__drip--3 {
+  top: 74%;
+  left: 48%;
+  height: 0;
+  width: 6px;
+  animation-delay: 0.2s !important;
+}
+
+@keyframes vv-drip {
+  0% { height: 0; opacity: 0; }
+  30% { opacity: 0.85; }
+  100% { height: 28px; opacity: 0.6; transform: translateY(4px); }
+}
+
+/* Wax chips */
+.vv-letter__chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 40% 60% 50% 50%;
+  background: #a84870;
+  opacity: 0;
+}
+
+.vv-letter__wax--break .vv-letter__chip {
+  animation: vv-chip 0.7s ease forwards;
+}
+
+.vv-letter__chip--0 { --vx: -42px; --vy: -38px; }
+.vv-letter__chip--1 { --vx: 38px; --vy: -42px; animation-delay: 0.04s; }
+.vv-letter__chip--2 { --vx: -28px; --vy: 32px; animation-delay: 0.08s; }
+.vv-letter__chip--3 { --vx: 44px; --vy: 18px; animation-delay: 0.02s; }
+.vv-letter__chip--4 { --vx: -48px; --vy: 8px; animation-delay: 0.06s; }
+.vv-letter__chip--5 { --vx: 12px; --vy: -48px; animation-delay: 0.1s; }
+.vv-letter__chip--6 { --vx: -18px; --vy: -52px; animation-delay: 0.03s; }
+.vv-letter__chip--7 { --vx: 52px; --vy: -12px; animation-delay: 0.07s; }
+.vv-letter__chip--8 { --vx: -8px; --vy: 46px; animation-delay: 0.05s; }
+
+@keyframes vv-chip {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--vx)), calc(-50% + var(--vy))) scale(0.3) rotate(180deg);
+  }
+}
+
+/* ─── Candle ─── */
+.vv-letter__candle {
+  position: absolute;
+  bottom: -8px;
+  right: -6px;
+  z-index: 6;
+  width: 28px;
+  height: 48px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.vv-letter__candle--lit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vv-letter__candle::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 36px;
+  border-radius: 2px 2px 4px 4px;
+  background: linear-gradient(90deg, #f8e8f0 0%, #fff8fc 40%, #f0d0e0 100%);
+  box-shadow: inset -2px 0 4px rgba(199, 107, 152, 0.15);
+}
+
+.vv-letter__wick {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 8px;
+  background: #3a2030;
+  border-radius: 1px;
+}
+
+.vv-letter__flame {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 20px;
+  background: radial-gradient(ellipse at 50% 80%, #ff9040 0%, #ff6020 40%, #ffcc40 70%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: vv-flame 0.35s ease-in-out infinite alternate;
+}
+
+.vv-letter__flame-glow {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 140, 60, 0.45) 0%, transparent 70%);
+  animation: vv-flame-glow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes vv-flame {
+  0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+  100% { transform: translateX(-50%) scale(1.08) rotate(2deg); }
+}
+
+@keyframes vv-flame-glow {
+  0% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+}
+
+/* ─── Hint ─── */
+.vv-gate__hint {
+  position: relative;
+  z-index: 5;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.4s ease;
+}
+
+.vv-gate__hint--hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vv-gate__hint-icon {
+  font-size: 1.25rem;
+  animation: vv-hint-bob 2s ease-in-out infinite;
+}
+
+@keyframes vv-hint-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.vv-gate__hint-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(240, 168, 200, 0.75);
+}

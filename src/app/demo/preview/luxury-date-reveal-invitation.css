@@ -1,0 +1,610 @@
+/* ─── Luxury Date Reveal invitation — Webgency template6 ─── */
+
+@import url("https://fonts.googleapis.com/css2?family=Imperial+Script&family=Rufina:wght@400;700&display=swap");
+
+.ldr-inv {
+  --ldr-bg: #fffdfb;
+  --ldr-text: #3a3a3a;
+  --ldr-muted: #7a9aaa;
+  --ldr-accent: #64a0bd;
+  --ldr-btn: #9bc9e1;
+
+  min-height: 100dvh;
+  background: var(--ldr-bg);
+  color: var(--ldr-text);
+}
+
+.ldr-inv__content {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease 0.2s;
+}
+
+.ldr-inv__content--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ldr-inv .imperial-font {
+  font-family: "Imperial Script", var(--font-script), "Great Vibes", cursive;
+}
+
+.ldr-inv .rufina-font {
+  font-family: "Rufina", Georgia, "Times New Roman", serif;
+}
+
+.ldr-inv .georgia-font {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ─── Hero video ─── */
+.ldr-inv__hero {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ldr-inv__hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ldr-inv__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 253, 251, 0.15) 0%,
+    rgba(255, 253, 251, 0.35) 50%,
+    rgba(255, 253, 251, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.ldr-inv__hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  max-width: 440px;
+}
+
+.ldr-inv__hero-sub {
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  color: var(--ldr-text);
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.ldr-inv__hero-names {
+  font-size: clamp(2.8rem, 12vw, 4.5rem);
+  color: var(--ldr-text);
+  margin: 0;
+  line-height: 1.05;
+  font-weight: 400;
+}
+
+/* ─── Blocks ─── */
+.ldr-inv__block {
+  position: relative;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.ldr-inv__section-label {
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ldr-muted);
+  margin: 0 0 0.5rem;
+}
+
+.ldr-inv__section-title {
+  font-size: clamp(1.4rem, 5vw, 1.75rem);
+  font-weight: 400;
+  color: var(--ldr-text);
+  margin: 0 0 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.ldr-inv__scratch-hint {
+  font-size: 0.95rem;
+  color: var(--ldr-muted);
+  margin: 0 0 2rem;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Scratch card ─── */
+.ldr-scratch__confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.ldr-scratch__flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  background: transparent;
+}
+
+.ldr-scratch__flash--go {
+  animation: ldr-flash 1.5s ease forwards;
+}
+
+@keyframes ldr-flash {
+  0% {
+    opacity: 0;
+    background: radial-gradient(ellipse 65% 45% at 50% 50%, rgba(200, 170, 110, 0.08) 0%, transparent 70%);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.ldr-scratch {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.ldr-scratch__panels {
+  display: flex;
+  gap: clamp(0.75rem, 3vw, 1.25rem);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.ldr-scratch__panel {
+  flex: 1;
+  max-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ldr-scratch__tile {
+  position: relative;
+  width: 90%;
+  aspect-ratio: 1 / 1.15;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(180, 145, 85, 0.14), 0 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.ldr-scratch__tile-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ldr-scratch__num {
+  font-size: clamp(1.75rem, 6.5vw, 2.4rem);
+  color: #3a3a3a;
+  line-height: 1;
+  font-weight: 400;
+  user-select: none;
+  pointer-events: none;
+}
+
+.ldr-scratch__num--month {
+  font-size: clamp(1rem, 4.5vw, 1.6rem);
+}
+
+.ldr-scratch__canvas {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  display: block;
+  touch-action: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.ldr-scratch__label {
+  font-size: clamp(0.55rem, 2vw, 0.7rem);
+  letter-spacing: 4px;
+  color: #7a9aaa;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.ldr-scratch__invited {
+  font-size: clamp(1.8rem, 7vw, 2.1rem);
+  color: #3a3a3a;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  min-height: 1.3em;
+  margin: 2rem 0 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ldr-scratch__invited--show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Dear friends ─── */
+.ldr-inv__block--dear {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.ldr-inv__deco {
+  position: absolute;
+  width: min(100px, 22vw);
+  height: auto;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.ldr-inv__deco--left {
+  left: 0;
+  top: 10%;
+}
+
+.ldr-inv__deco--right {
+  right: 0;
+  top: 5%;
+}
+
+.ldr-inv__float {
+  animation: ldr-float 2s ease-in-out infinite;
+}
+
+.ldr-inv__float--delay {
+  animation-delay: 0.5s;
+}
+
+@keyframes ldr-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.ldr-inv__dear-title {
+  font-size: 1.1rem;
+  margin: 0 0 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ldr-inv__dear-text {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #4a4a4a;
+  max-width: 520px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Schedule ─── */
+.ldr-inv__schedule-deco {
+  width: min(280px, 70vw);
+  height: auto;
+  margin: 0 auto 2rem;
+  opacity: 0.85;
+}
+
+.ldr-inv__schedule {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.ldr-inv__schedule-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(122, 154, 170, 0.2);
+}
+
+.ldr-inv__schedule-title {
+  font-size: 0.95rem;
+  color: #4a4a4a;
+  flex: 1;
+}
+
+.ldr-inv__schedule-time {
+  font-size: 0.95rem;
+  color: var(--ldr-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ─── Venue ─── */
+.ldr-inv__venue-name {
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+}
+
+.ldr-inv__venue-address {
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  margin: 0 0 2rem;
+}
+
+.ldr-inv__venue-img-wrap {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.ldr-inv__venue-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ─── Gallery ─── */
+.ldr-inv__gallery {
+  overflow: hidden;
+  padding: 1rem 0 2rem;
+  background: var(--ldr-bg);
+}
+
+.ldr-inv__gallery-track {
+  display: flex;
+  gap: 0.75rem;
+  animation: ldr-gallery-scroll 40s linear infinite;
+  width: max-content;
+}
+
+.ldr-inv__gallery-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ldr-gallery-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ldr-inv__gallery-item {
+  flex-shrink: 0;
+  width: min(280px, 55vw);
+  height: min(350px, 70vw);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.ldr-inv__gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Dress code ─── */
+.ldr-inv__dress-intro,
+.ldr-inv__dress-text {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+  max-width: 480px;
+  margin: 0 auto 1rem;
+}
+
+.ldr-inv__dress-colours {
+  font-size: 1rem;
+  margin: 1.5rem 0 1rem;
+  letter-spacing: 0.05em;
+}
+
+.ldr-inv__dress-swatches {
+  width: min(260px, 70vw);
+  height: auto;
+  margin: 0 auto 1.5rem;
+}
+
+/* ─── RSVP ─── */
+.ldr-inv__rsvp-intro {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+  max-width: 440px;
+  margin: 0 auto 1rem;
+}
+
+.ldr-inv__rsvp-btn {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  background: var(--ldr-btn);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  letter-spacing: 0.05em;
+}
+
+.ldr-inv__rsvp-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.ldr-inv__rsvp-panel {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.ldr-inv__rsvp-panel-title {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.ldr-inv__rsvp-deadline {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #666;
+  margin: 0 0 1.5rem;
+}
+
+.ldr-inv__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ldr-inv__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ldr-inv__form-field span,
+.ldr-inv__form-field legend {
+  font-size: 0.9rem;
+  color: #4a4a4a;
+}
+
+.ldr-inv__form-field input[type="text"] {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  background: #fff;
+}
+
+.ldr-inv__form-field input[type="text"]::placeholder {
+  color: #4a4a4a;
+  opacity: 0.5;
+}
+
+.ldr-inv__form-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  cursor: pointer;
+  margin-top: 0.35rem;
+}
+
+.ldr-inv__form-field fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ldr-inv__form-submit {
+  padding: 0.75rem 2rem;
+  background: var(--ldr-btn);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.ldr-inv__form-submit:hover {
+  opacity: 0.9;
+}
+
+.ldr-inv__rsvp-msg {
+  font-size: 1rem;
+  color: #4a4a4a;
+  margin-top: 1rem;
+}
+
+/* ─── Footer ─── */
+.ldr-inv__footer {
+  padding: 3rem 1.5rem 5rem;
+  text-align: center;
+}
+
+.ldr-inv__closing {
+  font-size: 1rem;
+  color: var(--ldr-muted);
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.ldr-inv__footer-names {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  margin: 0;
+  color: var(--ldr-text);
+}
+
+/* ─── Audio button ─── */
+.ldr-inv__audio-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9990;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ldr-accent);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(100, 160, 189, 0.35);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ldr-inv__audio-btn:hover {
+  transform: scale(1.05);
+}
+
+.ldr-inv__audio-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: white;
+}
+
+@media (max-width: 480px) {
+  .ldr-inv__block {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .ldr-scratch__invited {
+    font-size: 2.25rem;
+  }
+}

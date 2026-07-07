@@ -1,0 +1,297 @@
+/* ─── iPhone 17 mockup — shared across demo pages & marketing previews ─── */
+
+.iphone-17 {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.iphone-17__shell {
+  position: relative;
+  border-radius: var(--iphone-outer-r);
+  padding: var(--iphone-bezel);
+  background: linear-gradient(
+    155deg,
+    #5a5a5c 0%,
+    #2c2c2e 18%,
+    #1a1a1c 50%,
+    #3a3a3c 82%,
+    #6e6e70 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 32px 80px rgba(0, 0, 0, 0.28),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.iphone-17__screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--iphone-inner-r);
+  background: #000;
+  isolation: isolate;
+}
+
+.iphone-17__content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.iphone-17__island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  z-index: 100002;
+  width: var(--iphone-island-w);
+  height: var(--iphone-island-h);
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.iphone-17__island::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18%;
+  width: 10px;
+  height: 10px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #1a2840 0%, #0a1020 100%);
+  box-shadow: inset 0 0 2px rgba(80, 120, 200, 0.25);
+}
+
+/* Side buttons */
+.iphone-17__btn {
+  position: absolute;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4a4a4c, #2a2a2c, #4a4a4c);
+  pointer-events: none;
+}
+
+.iphone-17__btn--silent {
+  left: -2px;
+  top: 108px;
+  width: 3px;
+  height: 28px;
+}
+
+.iphone-17__btn--vol-up {
+  left: -2px;
+  top: 152px;
+  width: 3px;
+  height: 44px;
+}
+
+.iphone-17__btn--vol-down {
+  left: -2px;
+  top: 206px;
+  width: 3px;
+  height: 44px;
+}
+
+.iphone-17__btn--power {
+  right: -2px;
+  top: 168px;
+  width: 3px;
+  height: 64px;
+}
+
+/* ─── Size: demo (live invitation pages on desktop) ─── */
+.iphone-17--demo {
+  --iphone-bezel: 3px;
+  --iphone-outer-r: 54px;
+  --iphone-inner-r: 51px;
+  --iphone-island-w: 126px;
+  --iphone-island-h: 37px;
+  --iphone-screen-w: 393px;
+  --iphone-screen-h: min(852px, calc(100dvh - 56px));
+}
+
+.iphone-17--demo .iphone-17__shell {
+  width: calc(var(--iphone-screen-w) + var(--iphone-bezel) * 2);
+}
+
+.iphone-17--demo .iphone-17__screen {
+  width: var(--iphone-screen-w);
+  height: var(--iphone-screen-h);
+  min-height: 0;
+  transform: translateZ(0);
+}
+
+.iphone-17--demo .iphone-17__content {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 107, 152, 0.35) transparent;
+}
+
+.iphone-17--demo .iphone-17__content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.iphone-17--demo .iphone-17__content::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(199, 107, 152, 0.35);
+}
+
+/* ─── Size: md (hero phones) ─── */
+.iphone-17--md {
+  --iphone-bezel: 2px;
+  --iphone-outer-r: 38px;
+  --iphone-inner-r: 36px;
+  --iphone-island-w: 72px;
+  --iphone-island-h: 22px;
+  --iphone-screen-w: 220px;
+  --iphone-screen-h: 476px;
+}
+
+.iphone-17--md .iphone-17__shell {
+  width: calc(var(--iphone-screen-w) + var(--iphone-bezel) * 2);
+}
+
+.iphone-17--md .iphone-17__screen {
+  width: var(--iphone-screen-w);
+  height: var(--iphone-screen-h);
+}
+
+.iphone-17--md .iphone-17__btn--silent { top: 72px; height: 18px; }
+.iphone-17--md .iphone-17__btn--vol-up { top: 98px; height: 28px; }
+.iphone-17--md .iphone-17__btn--vol-down { top: 132px; height: 28px; }
+.iphone-17--md .iphone-17__btn--power { top: 112px; height: 40px; }
+
+@media (max-width: 639px) {
+  .iphone-17--md {
+    --iphone-screen-w: 200px;
+    --iphone-screen-h: 432px;
+    --iphone-outer-r: 34px;
+    --iphone-inner-r: 32px;
+    --iphone-island-w: 64px;
+    --iphone-island-h: 20px;
+  }
+}
+
+/* ─── Size: sm (premium section compact, theme cards) ─── */
+.iphone-17--sm {
+  --iphone-bezel: 2px;
+  --iphone-outer-r: 32px;
+  --iphone-inner-r: 30px;
+  --iphone-island-w: 64px;
+  --iphone-island-h: 19px;
+  --iphone-screen-w: 200px;
+  --iphone-screen-h: 432px;
+}
+
+.iphone-17--sm .iphone-17__shell {
+  width: calc(var(--iphone-screen-w) + var(--iphone-bezel) * 2);
+}
+
+.iphone-17--sm .iphone-17__screen {
+  width: var(--iphone-screen-w);
+  height: var(--iphone-screen-h);
+}
+
+.iphone-17--sm .iphone-17__btn--silent { top: 64px; height: 16px; }
+.iphone-17--sm .iphone-17__btn--vol-up { top: 88px; height: 24px; }
+.iphone-17--sm .iphone-17__btn--vol-down { top: 118px; height: 24px; }
+.iphone-17--sm .iphone-17__btn--power { top: 100px; height: 36px; }
+
+/* ─── Size: xs (theme catalog cards) ─── */
+.iphone-17--xs {
+  --iphone-bezel: 2px;
+  --iphone-outer-r: 28px;
+  --iphone-inner-r: 26px;
+  --iphone-island-w: 56px;
+  --iphone-island-h: 17px;
+  --iphone-screen-w: 168px;
+  --iphone-screen-h: 364px;
+}
+
+.iphone-17--xs .iphone-17__shell {
+  width: calc(var(--iphone-screen-w) + var(--iphone-bezel) * 2);
+}
+
+.iphone-17--xs .iphone-17__screen {
+  width: var(--iphone-screen-w);
+  height: var(--iphone-screen-h);
+}
+
+.iphone-17--xs .iphone-17__island { top: 8px; }
+.iphone-17--xs .iphone-17__btn--silent { top: 54px; height: 14px; }
+.iphone-17--xs .iphone-17__btn--vol-up { top: 74px; height: 20px; }
+.iphone-17--xs .iphone-17__btn--vol-down { top: 100px; height: 20px; }
+.iphone-17--xs .iphone-17__btn--power { top: 84px; height: 30px; }
+
+/* Hover lift for marketing mockups */
+.iphone-17--hover {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.iphone-17--hover:hover {
+  transform: translateY(-4px);
+}
+
+.iphone-17--hover:hover .iphone-17__shell {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 40px 100px rgba(0, 0, 0, 0.32),
+    0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+/* Demo page: hero sections fill phone viewport */
+@media (min-width: 768px) {
+  .iphone-17--demo .ldr-inv,
+  .iphone-17--demo .sg-inv,
+  .iphone-17--demo .cel-inv,
+  .iphone-17--demo .vv-inv {
+    min-height: auto;
+    width: 100%;
+  }
+
+  .iphone-17--demo .ldr-inv__hero,
+  .iphone-17--demo .sg-inv__hero,
+  .iphone-17--demo .cel-inv__hero,
+  .iphone-17--demo .vv-inv__hero {
+    min-height: var(--iphone-screen-h);
+  }
+
+  .iphone-17--demo .invitation-demo {
+    min-height: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .iphone-17--demo .iphone-17__shell {
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  .iphone-17--demo .iphone-17__screen {
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .iphone-17--demo .iphone-17__content {
+    overflow: visible;
+    min-height: 100dvh;
+  }
+
+  .iphone-17--demo .iphone-17__island,
+  .iphone-17--demo .iphone-17__btn {
+    display: none;
+  }
+}

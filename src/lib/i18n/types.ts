@@ -15,6 +15,7 @@ export interface Translations {
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    openInvite: string;
     saveTheDate: string;
   };
   benefits: { title: string; items: { title: string; desc: string }[] };
@@ -23,7 +24,20 @@ export interface Translations {
   themes: {
     title: string;
     subtitle: string;
+    eyebrow: string;
+    hint: string;
+    catalogTitle: string;
+    catalogSubtitle: string;
+    catalogHint: string;
     explore: string;
+    preview: string;
+    order: string;
+    showAll: string;
+    backHome: string;
+    modelsCount: string;
+    moreThemes: string;
+    premiumDemos: { eyebrow: string; title: string; subtitle: string };
+    badges: { new: string; popular: string; favorite: string };
     categories: Record<string, string>;
     items: Record<string, string>;
   };

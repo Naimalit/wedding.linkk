@@ -21,7 +21,7 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { href: "#themes", label: t.nav.themes },
+    { href: "/themes", label: t.nav.themes },
     { href: "#how-it-works", label: t.nav.howItWorks },
     { href: "#pricing", label: t.nav.pricing },
     { href: "#faq", label: t.nav.faq },

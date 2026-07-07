@@ -1,0 +1,507 @@
+/* ─── Sacred Garden inner invitation — Webgency The Sacred Garden ─── */
+
+.sg-inv {
+  --sg-bg: #f9f0e0;
+  --sg-gold: #a67d2b;
+  --sg-gold-light: #c9a050;
+  --sg-text: #3d3020;
+  --sg-muted: rgba(61, 48, 32, 0.65);
+  --sg-burgundy: #5a0f1b;
+
+  min-height: 100dvh;
+  background: var(--sg-bg);
+  color: var(--sg-text);
+}
+
+.sg-inv__content {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease 0.2s;
+}
+
+.sg-inv__content--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Font helpers */
+.sg-inv .script-font {
+  font-family: var(--font-script), "Great Vibes", cursive;
+}
+
+.sg-inv .ovo-font {
+  font-family: var(--font-ovo), "Ovo", Georgia, serif;
+}
+
+.sg-inv .cinzel-font {
+  font-family: var(--font-cinzel), "Cinzel", Georgia, serif;
+}
+
+/* ─── Hero ─── */
+.sg-inv__hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem 0;
+  overflow: hidden;
+}
+
+.sg-inv__hero-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(450px, 90vw);
+  height: 676px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 249, 235, 1) 0%,
+    rgba(255, 231, 192, 0) 85%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sg-inv__side {
+  position: absolute;
+  top: 5%;
+  width: min(80px, 16vw);
+  height: auto;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sg-inv__side--left {
+  left: 0;
+}
+
+.sg-inv__side--right {
+  right: 0;
+}
+
+.sg-inv__names {
+  position: relative;
+  z-index: 2;
+  margin-top: 6rem;
+  margin-bottom: 1.25rem;
+}
+
+.sg-inv__name {
+  font-size: clamp(4rem, 18vw, 5.5rem);
+  line-height: 0.65;
+  font-weight: 300;
+  color: var(--sg-gold);
+  margin: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.sg-inv__wedding-day {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sg-muted);
+  margin: 0 0 0.4rem;
+}
+
+.sg-inv__date {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  letter-spacing: 0.15em;
+  color: var(--sg-text);
+  margin: 0 0 0.75rem;
+}
+
+.sg-inv__amp {
+  position: relative;
+  z-index: 2;
+  font-size: 1.5rem;
+  color: var(--sg-gold-light);
+  margin: 0 0 1rem;
+  line-height: 1;
+}
+
+.sg-inv__tagline {
+  position: relative;
+  z-index: 2;
+  max-width: 20rem;
+  margin-bottom: 1.5rem;
+}
+
+.sg-inv__tagline p {
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  line-height: 1.5;
+  color: var(--sg-gold);
+  margin: 0;
+  font-style: italic;
+}
+
+.sg-inv__dear {
+  position: relative;
+  z-index: 2;
+  max-width: 24rem;
+  margin-bottom: 2rem;
+}
+
+.sg-inv__dear-title {
+  font-size: 0.9rem;
+  color: var(--sg-text);
+  margin: 0 0 0.5rem;
+}
+
+.sg-inv__dear p {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--sg-muted);
+  margin: 0;
+}
+
+.sg-inv__scroll {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(140, 100, 60, 0.6);
+  margin-bottom: 1.5rem;
+  animation: sg-scroll-pulse 2.4s ease-in-out infinite;
+}
+
+.sg-inv__scroll-icon {
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid rgba(140, 100, 60, 0.5);
+  border-bottom: 1.5px solid rgba(140, 100, 60, 0.5);
+  transform: rotate(45deg);
+  animation: sg-scroll-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes sg-scroll-bob {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translateY(3px); opacity: 1; }
+}
+
+@keyframes sg-scroll-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+.sg-inv__hero-botanical {
+  position: relative;
+  z-index: 1;
+  width: min(744px, 110vw);
+  height: auto;
+  margin-top: -1rem;
+  pointer-events: none;
+}
+
+/* ─── Blocks ─── */
+.sg-inv__block {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.sg-inv__label {
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sg-gold);
+  font-weight: 400;
+  margin: 0 0 1.5rem;
+}
+
+/* Countdown */
+.sg-inv__timer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.sg-inv__timer-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.25rem;
+}
+
+.sg-inv__timer-num {
+  font-size: clamp(1.75rem, 7vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--sg-text);
+}
+
+.sg-inv__timer-lbl {
+  margin-top: 0.4rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sg-muted);
+}
+
+.sg-inv__timer-colon {
+  font-size: 1.5rem;
+  color: var(--sg-gold-light);
+  padding-top: 0.1rem;
+  opacity: 0.5;
+}
+
+.sg-inv__countdown-sub {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--sg-muted);
+  margin: 0;
+}
+
+/* Schedule */
+.sg-inv__schedule {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sg-inv__schedule-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(166, 125, 43, 0.15);
+}
+
+.sg-inv__schedule-title {
+  font-size: 0.9rem;
+  color: var(--sg-text);
+  text-align: left;
+}
+
+.sg-inv__schedule-time {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--sg-muted);
+  white-space: nowrap;
+}
+
+/* Location */
+.sg-inv__venue-name {
+  font-size: 1.1rem;
+  color: var(--sg-text);
+  margin: 0 0 0.5rem;
+}
+
+.sg-inv__address {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--sg-muted);
+  margin: 0 0 1.5rem;
+}
+
+.sg-inv__address-label {
+  font-weight: 400;
+}
+
+/* Simple text blocks (gift, dress) */
+.sg-inv__block--simple .sg-inv__simple-text {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--sg-muted);
+  max-width: 22rem;
+  margin: 0 auto 1.25rem;
+}
+
+/* RSVP */
+.sg-inv__rsvp-intro {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--sg-muted);
+  max-width: 22rem;
+  margin: 0 auto 1rem;
+}
+
+.sg-inv__rsvp-btn {
+  border: 1px solid rgba(166, 125, 43, 0.4);
+  background: transparent;
+  color: var(--sg-gold);
+  padding: 0.75rem 2rem;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sg-inv__rsvp-btn:hover {
+  background: var(--sg-gold);
+  color: #fff;
+}
+
+.sg-inv__rsvp-panel {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.35);
+  text-align: left;
+}
+
+.sg-inv__rsvp-panel-title {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sg-gold);
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+.sg-inv__rsvp-deadline {
+  font-size: 0.75rem;
+  color: var(--sg-muted);
+  text-align: center;
+  margin: 0 0 1.25rem;
+}
+
+.sg-inv__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sg-inv__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sg-inv__form-field > span,
+.sg-inv__form-field > legend {
+  font-size: 0.72rem;
+  color: var(--sg-muted);
+}
+
+.sg-inv__form-field fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sg-inv__form-hint {
+  font-size: 0.65rem;
+  color: rgba(61, 48, 32, 0.45);
+}
+
+.sg-inv__form-field input[type="text"],
+.sg-inv__form-field input[type="number"] {
+  border: none;
+  border-bottom: 1px solid rgba(61, 48, 32, 0.2);
+  background: transparent;
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+  color: var(--sg-text);
+  outline: none;
+  font-family: inherit;
+}
+
+.sg-inv__form-field input:focus {
+  border-color: var(--sg-gold);
+}
+
+.sg-inv__form-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+  cursor: pointer;
+}
+
+.sg-inv__form-radio input {
+  accent-color: var(--sg-gold);
+}
+
+.sg-inv__form-submit {
+  margin-top: 0.5rem;
+  border: none;
+  background: var(--sg-burgundy);
+  color: #fff;
+  padding: 0.75rem;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sg-inv__form-submit:hover {
+  background: #3d0a12;
+}
+
+.sg-inv__rsvp-msg {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--sg-gold);
+  margin-top: 1rem;
+}
+
+/* Footer */
+.sg-inv__footer {
+  text-align: center;
+  padding: 2rem 1.5rem 5rem;
+}
+
+.sg-inv__closing {
+  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+  font-style: italic;
+  color: var(--sg-gold);
+  margin: 0 0 0.75rem;
+}
+
+.sg-inv__footer-names {
+  font-size: clamp(1.75rem, 7vw, 2.5rem);
+  color: var(--sg-gold);
+  line-height: 0.8;
+  margin: 0;
+}
+
+/* Floating audio button */
+.sg-inv__audio-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: var(--sg-burgundy);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483647;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.sg-inv__audio-btn:hover {
+  transform: scale(1.05);
+}
+
+.sg-inv__audio-btn svg {
+  width: 30px;
+  height: 30px;
+}

@@ -1,36 +1,24 @@
 import { notFound } from "next/navigation";
-import { Great_Vibes, Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { THEMES } from "@/data/themes";
-import { InvitationPreview } from "@/components/InvitationPreview";
+import { getThemeStyle } from "@/data/theme-styles";
+import { DemoLoader } from "@/components/DemoLoader";
 import "../preview/invitation.css";
-
-const script = Great_Vibes({
-  subsets: ["latin", "latin-ext"],
-  weight: "400",
-  variable: "--font-script",
-  display: "swap",
-});
-
-const serif = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inv-serif",
-  display: "swap",
-});
-
-const sans = DM_Sans({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inv-sans",
-  display: "swap",
-});
+import "../preview/sacred-garden-gate.css";
+import "../preview/sacred-garden-invitation.css";
 
 interface DemoPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return THEMES.map((theme) => ({ slug: theme.slug }));
+  return THEMES.filter(
+    (t) =>
+      t.slug !== "luxury-date-reveal" &&
+      t.slug !== "celestial-engagement" &&
+      t.slug !== "vibrant-vows",
+  ).map((theme) => ({
+    slug: theme.slug,
+  }));
 }
 
 export default async function DemoPage({ params }: DemoPageProps) {
@@ -38,9 +26,14 @@ export default async function DemoPage({ params }: DemoPageProps) {
   const theme = THEMES.find((t) => t.slug === slug);
   if (!theme) notFound();
 
-  return (
-    <div className={`${script.variable} ${serif.variable} ${sans.variable} invitation-demo`}>
-      <InvitationPreview />
-    </div>
-  );
+  const themeStyle = getThemeStyle(theme.slug);
+  if (
+    themeStyle.gateVariant === "luxury-date-reveal" ||
+    themeStyle.gateVariant === "celestial-engagement" ||
+    themeStyle.gateVariant === "vibrant-vows"
+  ) {
+    notFound();
+  }
+
+  return <DemoLoader variant="theme" slug={theme.slug} />;
 }

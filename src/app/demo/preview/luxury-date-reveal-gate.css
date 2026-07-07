@@ -1,0 +1,167 @@
+/* ─── Luxury Date Reveal gate — Webgency template6 envelope ─── */
+
+.ldr-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #fffdfb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: opacity 1.1s ease 0.3s, transform 1.1s ease 0.3s;
+}
+
+.ldr-gate--opening {
+  cursor: default;
+}
+
+.ldr-gate--out {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.04);
+}
+
+.ldr-env {
+  position: relative;
+  width: min(420px, 92vw);
+  height: min(520px, 72vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ldr-env__shadow {
+  position: absolute;
+  bottom: -18px;
+  left: 8%;
+  right: 8%;
+  height: 28px;
+  background: radial-gradient(ellipse, rgba(60, 80, 90, 0.12) 0%, transparent 70%);
+  filter: blur(4px);
+}
+
+.ldr-env__flap {
+  position: absolute;
+  object-fit: contain;
+  transition: transform 1.5s ease, opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.ldr-env__flap--top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  height: auto;
+  z-index: 3;
+  transform-origin: top center;
+}
+
+.ldr-env__flap--bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  height: auto;
+  z-index: 2;
+  transform-origin: bottom center;
+}
+
+.ldr-env__flap--left {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: 88%;
+  z-index: 4;
+  transform-origin: left center;
+}
+
+.ldr-env__flap--right {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: 88%;
+  z-index: 4;
+  transform-origin: right center;
+}
+
+.ldr-env--open .ldr-env__flap--top {
+  transform: translateX(-50%) translateY(-110%);
+  transition-delay: 2.5s;
+}
+
+.ldr-env--open .ldr-env__flap--bottom {
+  transform: translateX(-50%) translateY(110%);
+  transition-delay: 2.5s;
+}
+
+.ldr-env--open .ldr-env__flap--left {
+  transform: translateY(-50%) translateX(-115%);
+  transition-delay: 2.5s;
+  transition-duration: 2s;
+}
+
+.ldr-env--open .ldr-env__flap--right {
+  transform: translateY(-50%) translateX(115%);
+  transition-delay: 2.5s;
+  transition-duration: 2s;
+  opacity: 0;
+}
+
+.ldr-env__seal {
+  position: relative;
+  z-index: 5;
+  width: min(180px, 42vw);
+  height: min(180px, 42vw);
+  transition: transform 1.5s ease 1s, opacity 1.5s ease 1s;
+}
+
+.ldr-env__seal-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.ldr-env__seal--break {
+  transform: scale(1.22);
+  opacity: 0;
+}
+
+.ldr-gate__tap {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 1.5s ease;
+  text-align: center;
+}
+
+.ldr-gate__tap--hide {
+  opacity: 0;
+}
+
+.ldr-gate__tap-label {
+  font-family: "Rufina", Georgia, serif;
+  font-size: 1.05rem;
+  color: #4a4a4a;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .ldr-env {
+    width: min(320px, 90vw);
+    height: min(420px, 65vh);
+  }
+
+  .ldr-env__seal {
+    width: min(140px, 38vw);
+    height: min(140px, 38vw);
+  }
+}

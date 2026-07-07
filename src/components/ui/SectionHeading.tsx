@@ -1,16 +1,21 @@
 interface SectionHeadingProps {
   title: string;
   subtitle?: string;
+  eyebrow?: string;
   align?: "left" | "center";
 }
 
 export function SectionHeading({
   title,
   subtitle,
+  eyebrow,
   align = "center",
 }: SectionHeadingProps) {
   return (
     <div className={align === "center" ? "text-center max-w-2xl mx-auto mb-14" : "mb-14"}>
+      {eyebrow && (
+        <p className="text-xs uppercase tracking-[0.35em] text-rose-gold mb-4">{eyebrow}</p>
+      )}
       <h2
         className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-charcoal tracking-tight"
         style={{ fontFamily: "var(--font-serif)" }}

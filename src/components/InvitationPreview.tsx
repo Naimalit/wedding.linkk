@@ -16,6 +16,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { getThemeStyle, themeStyleToCssVars } from "@/data/theme-styles";
 
 const TARGET_DATE = new Date("2026-08-22T16:00:00");
 
@@ -36,7 +37,9 @@ const GALLERY = [
 const COPY = {
   sq: {
     gateLabel: "Ftesë Digjitale",
-    openHint: "Prek zarfen për ta hapur",
+    gateSubtitle: "Erion & Sara",
+    gateWelcome: "Jeni të ftuar në ditën tonë të madhe",
+    openHint: "Prek për ta hapur",
     back: "Kthehu",
     together: "Së bashku me familjet e tyre",
     invite: "kanë kënaqësinë t'ju ftojnë në dasmën e tyre",
@@ -91,7 +94,9 @@ const COPY = {
   },
   en: {
     gateLabel: "Digital Invitation",
-    openHint: "Tap the envelope to open",
+    gateSubtitle: "Erion & Sara",
+    gateWelcome: "You are invited to our special day",
+    openHint: "Tap to open",
     back: "Back",
     together: "Together with their families",
     invite: "request the pleasure of your company at their wedding",
@@ -146,7 +151,9 @@ const COPY = {
   },
   mk: {
     gateLabel: "Digitalna Pokana",
-    openHint: "Doprete ja plikata",
+    gateSubtitle: "Erion & Sara",
+    gateWelcome: "Ste pokaneti na nashiot poseben den",
+    openHint: "Kliknete za otvaranje",
     back: "Nazad",
     together: "Zaedno so nivnite semejstva",
     invite: "so radost ve pokanuvaat na nivnata svadba",
@@ -285,9 +292,11 @@ function RevealSection({
   );
 }
 
-export function InvitationPreview() {
+export function InvitationPreview({ themeSlug = "eternal-romance" }: { themeSlug?: string }) {
   const { locale } = useI18n();
   const L = COPY[locale];
+  const themeStyle = getThemeStyle(themeSlug);
+  const presetClass = `inv-preset-${themeStyle.preset}`;
   const countdown = useCountdown(TARGET_DATE);
 
   const [gateOpen, setGateOpen] = useState(false);
@@ -329,8 +338,8 @@ export function InvitationPreview() {
       setTimeout(() => {
         setContentVisible(true);
         void setMusic(true);
-      }, 200);
-    }, 1200);
+      }, 350);
+    }, 2600);
   }, [envelopeOpening, setMusic]);
 
   useEffect(() => {
@@ -365,33 +374,74 @@ export function InvitationPreview() {
   };
 
   return (
-    <div className="inv-grain relative">
+    <div
+      className={`inv-grain relative ${presetClass}`}
+      style={themeStyleToCssVars(themeStyle)}
+      data-theme={themeSlug}
+    >
       <audio ref={audioRef} src={DEMO_MUSIC} loop preload="auto" className="hidden" />
-      {/* Gate — envelope intro */}
-      <div className={`inv-gate ${gateOpen ? "is-open" : ""}`}>
-        <p className="inv-gate__label">{L.gateLabel}</p>
 
-        <button
-          type="button"
-          className={`inv-envelope ${envelopeOpening ? "is-opening" : ""}`}
-          onClick={openInvitation}
-          aria-label={L.openHint}
+      <div
+          className={`inv-luxe-gate ${gateOpen ? "is-open" : ""} ${envelopeOpening ? "is-animating" : ""}`}
         >
-          <div className="inv-envelope__body" />
-          <div className="inv-envelope__flap" />
-          <div className="inv-envelope__wax">E&amp;S</div>
-          <div className="inv-envelope__letter">
-            <p className="script-font text-3xl inv-gold-text">Erion</p>
-            <p className="script-font text-lg text-[#c9a87c]/50">&amp;</p>
-            <p className="script-font text-3xl inv-gold-text">Sara</p>
-            <p className="sans-font mt-3 text-[10px] uppercase tracking-[0.3em] text-[#1a1a1a]/40">
-              22 · 08 · 2026
-            </p>
-          </div>
-        </button>
+          <div className="inv-luxe-gate__spotlight" aria-hidden />
+          <div className="inv-luxe-gate__veil" aria-hidden />
 
-        <p className="inv-gate__hint">{L.openHint}</p>
-      </div>
+          <div className="inv-luxe-gate__frame">
+            <button
+              type="button"
+              className={`inv-luxe-gate__trigger ${envelopeOpening ? "is-opening" : ""}`}
+              onClick={openInvitation}
+              disabled={envelopeOpening}
+              aria-label={L.openHint}
+            >
+              <div className={`inv-luxe-env ${envelopeOpening ? "is-opening" : ""}`}>
+                <div className="inv-luxe-env__glow" aria-hidden />
+                <div className="inv-luxe-env__stage">
+                  <div className="inv-luxe-env__shadow" aria-hidden />
+                  <div className="inv-luxe-env__letter">
+                    <div className="inv-luxe-env__letter-frame">
+                      <div className="inv-luxe-env__letter-inner">
+                        <span className="inv-luxe-env__letter-ornament">✦</span>
+                        <p className="script-font inv-luxe-env__letter-name">Erion</p>
+                        <p className="script-font inv-luxe-env__letter-amp">&amp;</p>
+                        <p className="script-font inv-luxe-env__letter-name">Sara</p>
+                        <div className="inv-luxe-env__letter-divider" aria-hidden />
+                        <p className="sans-font inv-luxe-env__letter-date">22 · 08 · 2026</p>
+                        <span className="inv-luxe-env__letter-ornament">✦</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="inv-luxe-env__shell">
+                    <div className="inv-luxe-env__back" aria-hidden />
+                    <div className="inv-luxe-env__fold inv-luxe-env__fold--left" aria-hidden />
+                    <div className="inv-luxe-env__fold inv-luxe-env__fold--right" aria-hidden />
+                    <div className="inv-luxe-env__pocket" aria-hidden />
+                    <div className="inv-luxe-env__flap">
+                      <div className="inv-luxe-env__flap-shine" aria-hidden />
+                    </div>
+                    <div className="inv-luxe-env__seal-wrap">
+                      <div className="inv-luxe-env__seal">
+                        <span className="inv-luxe-env__seal-ring" aria-hidden />
+                        <span className="inv-luxe-env__seal-text">E&amp;S</span>
+                      </div>
+                      {envelopeOpening &&
+                        Array.from({ length: 6 }).map((_, i) => (
+                          <span key={i} className={`inv-luxe-env__seal-chip inv-luxe-env__seal-chip--${i}`} />
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className={`inv-luxe-gate__tap sans-font ${envelopeOpening ? "is-hidden" : ""}`}>
+                {L.openHint}
+              </p>
+            </button>
+          </div>
+
+          <div className="inv-luxe-gate__burst" aria-hidden />
+        </div>
 
       {/* Main invitation */}
       <div className={`inv-main ${contentVisible ? "is-visible" : ""}`}>
@@ -441,6 +491,7 @@ export function InvitationPreview() {
           <div className="inv-hero__overlay" />
 
           {contentVisible &&
+            themeStyle.showPetals &&
             Array.from({ length: 14 }).map((_, i) => (
               <span
                 key={i}
@@ -453,7 +504,7 @@ export function InvitationPreview() {
               />
             ))}
 
-          <div className="inv-hero__frame">
+          <div className={`inv-hero__frame ${themeStyle.heroCorners ? "" : "inv-hero__frame--minimal"}`}>
             <p className="sans-font mb-5 text-[10px] uppercase tracking-[0.45em] text-white/55">
               {L.together}
             </p>

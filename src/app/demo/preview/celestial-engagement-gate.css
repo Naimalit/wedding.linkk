@@ -1,0 +1,304 @@
+/* ─── Celestial Engagement gate — starfield burst envelope ─── */
+
+.cel-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, #141c38 0%, #080c1c 70%);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  overflow: hidden;
+  transition: opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s;
+}
+
+.cel-gate--opening {
+  cursor: default;
+}
+
+.cel-gate--out {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.08);
+}
+
+.cel-gate__stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cel-gate__burst {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.cel-gate__flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(232, 200, 114, 0.55) 0%, transparent 55%);
+}
+
+.cel-gate__flash--on {
+  animation: cel-flash 0.7s ease forwards;
+}
+
+@keyframes cel-flash {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ─── Golden envelope ─── */
+.cel-env {
+  position: relative;
+  z-index: 4;
+  width: min(340px, 82vw);
+  height: min(240px, 52vw);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  animation: cel-env-float 5s ease-in-out infinite;
+}
+
+.cel-gate--opening .cel-env {
+  animation: cel-env-zoom 2.8s ease forwards;
+}
+
+@keyframes cel-env-float {
+  0%, 100% { transform: translateY(0) rotateX(2deg); }
+  50% { transform: translateY(-10px) rotateX(-1deg); }
+}
+
+@keyframes cel-env-zoom {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.04); }
+  100% { transform: translateY(-14px) scale(1.1); }
+}
+
+.cel-env__glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(ellipse at center, rgba(232, 200, 114, 0.35) 0%, transparent 65%);
+  filter: blur(20px);
+  animation: cel-glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes cel-glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+.cel-env__body {
+  position: absolute;
+  inset: 8% 4%;
+  background: linear-gradient(160deg, #f5e6c0 0%, #d4b87a 35%, #c9a84c 70%, #a88a3a 100%);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.4),
+    0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.cel-env__flap {
+  position: absolute;
+  background: linear-gradient(160deg, #f8ecd0 0%, #d9bc7e 50%, #b8944a 100%);
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.15, 1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.cel-env__flap--top {
+  top: 0;
+  left: 4%;
+  right: 4%;
+  height: 52%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  z-index: 3;
+}
+
+.cel-env__flap--bottom {
+  bottom: 0;
+  left: 4%;
+  right: 4%;
+  height: 52%;
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+  transform-origin: bottom center;
+  z-index: 1;
+}
+
+.cel-env__flap--left {
+  top: 8%;
+  bottom: 8%;
+  left: 0;
+  width: 52%;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transform-origin: left center;
+  z-index: 2;
+}
+
+.cel-env__flap--right {
+  top: 8%;
+  bottom: 8%;
+  right: 0;
+  width: 52%;
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  transform-origin: right center;
+  z-index: 2;
+}
+
+.cel-env--open .cel-env__flap--top {
+  transform: rotateX(-160deg);
+  transition-delay: 0.35s;
+}
+
+.cel-env--open .cel-env__flap--bottom {
+  transform: rotateX(160deg);
+  transition-delay: 0.35s;
+}
+
+.cel-env--open .cel-env__flap--left {
+  transform: rotateY(130deg);
+  transition-delay: 0.45s;
+}
+
+.cel-env--open .cel-env__flap--right {
+  transform: rotateY(-130deg);
+  transition-delay: 0.45s;
+}
+
+/* ─── Wax seal ─── */
+.cel-env__seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  width: 88px;
+  height: 88px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.cel-env__seal-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 200, 114, 0.5);
+  animation: cel-ring-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes cel-ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.cel-env__seal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #8b2028 0%, #5a0f18 55%, #3a0810 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(255, 180, 180, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.cel-env__seal-text {
+  position: relative;
+  z-index: 1;
+  font-family: "Great Vibes", cursive;
+  font-size: 1.65rem;
+  color: #f5e0b0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.cel-env__seal--break {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+}
+
+.cel-env__shard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: #c9a84c;
+  animation: cel-shard-fly 0.9s ease forwards;
+}
+
+.cel-env__shard--0 { animation-delay: 0ms; --sx: -60px; --sy: -80px; }
+.cel-env__shard--1 { animation-delay: 30ms; --sx: 70px; --sy: -60px; }
+.cel-env__shard--2 { animation-delay: 60ms; --sx: -40px; --sy: 70px; }
+.cel-env__shard--3 { animation-delay: 90ms; --sx: 50px; --sy: 80px; }
+.cel-env__shard--4 { animation-delay: 20ms; --sx: -80px; --sy: 10px; }
+.cel-env__shard--5 { animation-delay: 50ms; --sx: 85px; --sy: -10px; }
+.cel-env__shard--6 { animation-delay: 80ms; --sx: -20px; --sy: -90px; }
+.cel-env__shard--7 { animation-delay: 110ms; --sx: 30px; --sy: 90px; }
+.cel-env__shard--8 { animation-delay: 40ms; --sx: -70px; --sy: 50px; }
+.cel-env__shard--9 { animation-delay: 70ms; --sx: 75px; --sy: 40px; }
+.cel-env__shard--10 { animation-delay: 100ms; --sx: 0px; --sy: -95px; }
+.cel-env__shard--11 { animation-delay: 130ms; --sx: 10px; --sy: 95px; }
+
+@keyframes cel-shard-fly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
+}
+
+/* ─── Hint ─── */
+.cel-gate__hint {
+  position: absolute;
+  bottom: 14%;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: opacity 1s ease;
+}
+
+.cel-gate__hint--hide {
+  opacity: 0;
+}
+
+.cel-gate__hint-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232, 200, 114, 0.85);
+  animation: cel-hint-shimmer 3s ease-in-out infinite;
+}
+
+.cel-gate__hint-icon {
+  color: rgba(232, 200, 114, 0.5);
+  font-size: 0.7rem;
+  animation: cel-hint-spin 6s linear infinite;
+}
+
+@keyframes cel-hint-shimmer {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes cel-hint-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
